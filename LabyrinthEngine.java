@@ -2,6 +2,7 @@ import java.util.*;
 class LabyrinthEngine {
     private static final char BORDER = '▓';
     private static final char PASSAGE = ' ';
+    private static final char SOLUTION_MARKER = '•';
 
     private char[][] grid;
     private boolean[][] tracker;
@@ -62,8 +63,33 @@ class LabyrinthEngine {
 
     }
 
-    private void resolvePath () {
+    private boolean resolvePath() {
+        boolean found = explore(origin[0], origin[1]);
+        return found;
     }
 
+
+
+    private boolean explore(int y, int x) {
+        if (y == destination[0] && x == destination[1]) {
+            grid[y][x] = SOLUTION_MARKER;
+            return true;
+        }
+
+        if (y < 0 || y >= height || grid[y][x] != PASSAGE || tracker[y][x]) {
+            return false;
+        }
+
+        tracker[y][x] = true;
+        final int[][] moves = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+
+        for (int[] move : moves) {
+            if (explore(y + move[0], x + move[1])) {
+                grid[y][x] = SOLUTION_MARKER;
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
