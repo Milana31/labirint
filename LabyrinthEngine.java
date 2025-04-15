@@ -18,6 +18,10 @@ class LabyrinthEngine {
 //     * @param args Аргументы командной строки (не используются)
 //
     public static void main(String[] args) {
+        LabyrinthEngine lab = new LabyrinthEngine();
+        lab.initialize();      // Инициализация параметров
+        lab.createLabyrinth(); // Генерация лабиринта
+        lab.resolvePath();     // Поиск и отображение пути
     }
 
 //
