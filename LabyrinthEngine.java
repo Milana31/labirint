@@ -30,6 +30,7 @@ class LabyrinthEngine {
 
         Deque<int[]> history = new ArrayDeque<>();
         history.push(origin);
+        grid[origin[0]][origin[1]] = PASSAGE;
 
         Random rand = new Random();
         final int[][] offsets = {{2, 0}, {0, 2}, {-2, 0}, {0, -2}};
@@ -60,6 +61,8 @@ class LabyrinthEngine {
                 history.pop();
             }
         }
+        grid[destination[0]][destination[1]] = PASSAGE;
+        displayGrid("Generated Labyrinth:");
 
     }
 
