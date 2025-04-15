@@ -76,7 +76,8 @@ class LabyrinthEngine {
             return true;
         }
 
-        if (y < 0 || y >= height || grid[y][x] != PASSAGE || tracker[y][x]) {
+        if (y < 0 || x < 0 ||  y >= height || x >= width ||
+        grid[y][x] != PASSAGE || tracker[y][x]) {
             return false;
         }
 
@@ -90,6 +91,16 @@ class LabyrinthEngine {
             }
         }
         return false;
+    }
+
+    private void displayGrid(String header) {
+        System.out.println("\n" + header);
+        for (char[] row : grid) {
+            for (char cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        }
     }
 
 }
