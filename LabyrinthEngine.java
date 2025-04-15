@@ -15,9 +15,9 @@ class LabyrinthEngine {
     private void initialize() {
         try (Scanner input = new Scanner(System.in)) {
             System.out.print("Enter maze height (>9): ");
-            height = input.nextInt();
+            height = validateDimension(input.nextInt());
             System.out.print("Enter maze width (>9): ");
-            width = input.nextInt();
+            width = validateDimension(input.nextInt());
 
             grid = new char[height][width];
             tracker = new boolean[height][width];
@@ -69,6 +69,10 @@ class LabyrinthEngine {
     }
 
 
+    private int validateDimension ( int size){
+        if (size < 10) throw new IllegalArgumentException();
+        return size % 2 == 0 ? size + 1 : size;
+    }
 
     private boolean explore(int y, int x) {
         if (y == destination[0] && x == destination[1]) {
@@ -76,7 +80,7 @@ class LabyrinthEngine {
             return true;
         }
 
-        if (y < 0 || x < 0 ||  y >= height || x >= width ||
+        if (y < 0 || x < 0 || y >= height || x >= width ||
         grid[y][x] != PASSAGE || tracker[y][x]) {
             return false;
         }
